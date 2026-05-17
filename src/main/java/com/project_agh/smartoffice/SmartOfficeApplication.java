@@ -1,13 +1,17 @@
 package com.project_agh.smartoffice;
 
+import com.project_agh.smartoffice.beans.Office;
+import com.project_agh.smartoffice.beans.WorkPlace;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class SmartOfficeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SmartOfficeApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(SmartOfficeApplication.class, args);
     }
 
 }
