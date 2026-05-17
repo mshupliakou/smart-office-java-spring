@@ -3,19 +3,18 @@ package com.project_agh.smartoffice.serviece;
 import com.project_agh.smartoffice.dto.WorkerCreateDto;
 import com.project_agh.smartoffice.dto.WorkerReadDto;
 import com.project_agh.smartoffice.model.Worker;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 @Service
 public class WorkerService {
-    HashMap<UUID, Worker> workers;
-    public WorkerService() {
-        workers = new HashMap<>();
-    }
+    private final ConcurrentHashMap<UUID, Worker> workers = new ConcurrentHashMap<>();
 
-    public void addWorker(WorkerCreateDto workerCreateDto) {
+    public Worker addWorker(WorkerCreateDto workerCreateDto) {
         Worker worker = new Worker();
         WorkerReadDto workerReadDto = createWorker(workerCreateDto);
         worker.setId(workerReadDto.getId());
@@ -23,7 +22,8 @@ public class WorkerService {
         worker.setLastname(workerReadDto.getLastname());
         worker.setJobTitle(workerReadDto.getJobTitle());
         workers.put(worker.getId(), worker);
-        System.out.println("Worker with id " + worker.getId() + " has been added to the map");
+        log.info("Worker with id " + worker.getId() + " has been added to the map");
+        return worker;
     }
 
     public WorkerReadDto createWorker(WorkerCreateDto workerCreateDto) {
@@ -35,8 +35,8 @@ public class WorkerService {
         return worker;
     }
 
-    public HashMap<UUID, Worker> listAllWorkers() {
-        return workers;
+    public ConcurrentHashMap<UUID, Worker> listAllWorkers() {
+        return  workers;
     }
 
     public Worker getWorker(UUID id) {

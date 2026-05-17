@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/smart-office/workers-hub")
 public class WorkerController {
-    WorkerService workerService;
+    private final WorkerService workerService;
 
     WorkerController(WorkerService workerService) {
         this.workerService = workerService;
@@ -26,16 +26,12 @@ public class WorkerController {
 
     @GetMapping("/workers")
     List<Worker> getWorkers() {
-        List<Worker> workers = new ArrayList<>();
-        for(UUID id : workerService.listAllWorkers().keySet()){
-            workers.add(workerService.getWorker(id));
-        }
-        return workers;
+        return new ArrayList<>(workerService.listAllWorkers().values());
     }
 
     @PostMapping("/add-new-worker-form")
     @ResponseStatus(HttpStatus.CREATED)
-    void addWorkerToDataBase(WorkerCreateDto workerCreateDto) {
-        workerService.addWorker(workerCreateDto);
+    Worker addWorkerToDataBase(@RequestBody WorkerCreateDto workerCreateDto) {
+        return workerService.addWorker(workerCreateDto);
     }
 }

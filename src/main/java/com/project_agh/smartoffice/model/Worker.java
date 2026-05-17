@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Data
-@Component
 public class Worker {
     private UUID id;
     private String name;
