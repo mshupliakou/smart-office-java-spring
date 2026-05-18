@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 public class WorkerReadDto {
-    UUID id;
+    String id;
     String name;
     String lastname;
     String jobTitle;

@@ -20,13 +20,13 @@ public class WorkerController {
     }
 
     @GetMapping("/{id}")
-    Worker getWorkerById(@PathVariable UUID id) {
+    Worker getWorkerById(@PathVariable String id) {
         return workerService.getWorker(id);
     }
 
     @GetMapping("/workers")
     List<Worker> getWorkers() {
-        return new ArrayList<>(workerService.listAllWorkers().values());
+        return workerService.listAllWorkers();
     }
 
     @PostMapping("/add-new-worker-form")
